@@ -1,6 +1,4 @@
-Got it! Let’s explain **Post-Quantum Cryptography (PQC) in blockchain** like you’re a 5-year-old 🧒 — no prior knowledge needed.
-
----
+# PQC and Blockchain
 
 ### 🎁 Imagine This:
 
