@@ -139,16 +139,6 @@ But… you can work around it 👇
 
 > ✅ TL;DR: You can use PQC **in your application layer**, and **verify inside the contract** using custom logic.
 
-### 🧪 Strategy 1: Off-chain PQC Signature + On-chain Verification
-
-You can:
-
-1. Have users sign a message using a PQC algorithm (e.g. **Dilithium**).
-2. Send the message + signature to a smart contract.
-3. The contract runs logic to **verify the signature** using a PQC verifier written in Solidity.
-
----
-
 ### 🔥 Example: Falcon or Dilithium in a Contract
 
 1. Use a PQC lib like [Dilithium](https://github.com/pq-crystals/dilithium) in JS/Python to:
@@ -200,27 +190,6 @@ Then you can:
 
 ---
 
-## 🧪 Simplified Pseudocode for PQC in Smart Contract
-
-Assume you preprocessed a PQC pubkey and signature as simple hash values:
-
-```solidity
-contract PQCRegistry {
-    mapping(bytes32 => bool) public usedMessages;
-
-    function verifyPQC(bytes32 messageHash, bytes32 sigHash) public {
-        require(!usedMessages[messageHash], "Replay detected");
-
-        // In real usage, you'd verify sigHash with PQC pubkey.
-        // Here, we accept it if it matches a pre-shared value
-        bytes32 expectedSig = keccak256(abi.encodePacked("fakePQCsig", messageHash));
-        require(sigHash == expectedSig, "Invalid PQC signature");
-
-        usedMessages[messageHash] = true;
-    }
-}
-```
-
 You could simulate a PQC signature verification by:
 
 * Pre-hashing the PQC signature off-chain
@@ -240,7 +209,5 @@ You could simulate a PQC signature verification by:
 
 ---
 
-Would you like a working end-to-end demo:
-🔐 PQC sign (Python) → ✅ verify in Solidity (mocked)?
-Or help writing your own PQC-aware contract template?
+
 
